@@ -1,0 +1,61 @@
+.section-about {
+    background-color: $color-grey-light-1;
+    padding: 25rem 0;
+    margin-top: -20vh; //95vh - 75vh
+}
+
+.section-features {
+    padding: 20rem 0rem;  // 20 top/bottom 0 left/right
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, .8),
+        rgba($color-primary-dark, .8)),
+        url(../img/nat-4.jpg);
+        background-size: cover;
+        margin-top: -10rem;
+
+        //could use clip but another way is to skew entire section
+        transform: skewy(-7deg);
+
+        //direct child selector to fix card skews -- only selects first child it comes accross *also more re-useable*
+        & > * {
+            transform: skewy(7deg);
+        }
+}
+
+.section-tours {
+    background-color: $color-grey-light-1;
+    padding: 20rem 0 15rem 0; //(top, right, bottom, left)
+    margin-top: -10rem; //95vh - 75vh
+}
+
+.section-stories {
+    position: relative;
+    padding: 15rem 0; //top/bottom, left/right
+    //remove background color to see video
+}
+
+.section-book {
+    padding: 15rem 0;
+    background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+}
+
+.book {
+    //SOLID COLOR GRADIENT
+    background-image: linear-gradient(
+                                    105deg, 
+                                    rgba($color-white, .9) 0%, /*at 0% we want white*/
+                                    rgba($color-white, .9) 50%, /*also white at 50%*/
+                                    transparent 50%), /*transparent at 50%*/
+                                     url(../img/nat-10.jpg);
+    background-size: cover; //or use 100% (they are the same) put 50% to divide width by 2 and get 4 images ****
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .25);
+
+    height: 50rem;
+
+    &__form {
+        width: 50%;
+        padding: 6rem;
+    }
+}

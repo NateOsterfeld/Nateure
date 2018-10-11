@@ -1,0 +1,40 @@
+.composition {  //BLOCK
+    position: relative;
+
+    &__photo{  //ELEMENT
+        width: 55%; //define width of images so viewport will scale aka responsive design
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .4); //(x y blurr rgba(black, opacity)
+        border-radius: 2px;
+        position: absolute; //places elements according to reference aka first position it encounters thats set to something aka composition
+        z-index: 10;
+        transition: all .2s;
+        outline-offset: 2rem;
+
+        &--p1 {  //MODIFIERS
+            left: 0;
+            top: -2rem; //moves up or removes -2rem from top
+        }
+
+        &--p2 {
+            right: -2rem;  //moves 0 pixels from right of container aka if (+rem it would move left, if -rem then move right) because its from
+            top: 5rem; //moves 2rem from top (moves down)
+        }
+
+        &--p3 {  //use percentages for responsive design
+            left: 20%;  //moves right (adds space from left)
+            top: 10rem; //moves down
+        }
+
+        &:hover {
+            outline: 1.5rem solid $color-primary; //similar to border but OUTLINE-OFFSET gives look
+            transform: scale(1.05) translatey(-10px);
+            box-shadow: 0 2.5rem 4rem rgba($color-black, .5);
+            z-index: 20; //means this layer displays on top
+        }
+    }
+
+    &:hover &__photo:not(:hover) {
+        transform: scale(.95);
+    }
+    //composition:hover composition__photo:not(:hover);
+}  

@@ -1,0 +1,66 @@
+.story {
+    width: 75%;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    background-color: rgba($color-white, .6);
+    border-radius: 3px;
+    padding: 6rem;
+    padding-left: 9rem;
+    font-size: $default-font-size;
+    transform: skewx(-12deg);
+
+    & > * {
+
+    }
+
+    &__shape {
+        width: 15rem;
+        height: 15rem;
+        background-color: orangered;
+        float: left; //floats left and makes rest of content float around it
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%); //radius 50%=7.5rem at horizontal/vertical 50% 50%=center
+
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+        transform: translatex(-3rem) skewx(12deg);
+        position: relative;
+    }
+
+    &__image {
+        height: 100%;
+        transform: translatex(-4rem) scale(1.4); //centers girl in picture
+        backface-visibility: hidden;
+        transition: all .5s;
+    }
+
+    &__text {
+        transform: skewx(12deg);
+    }
+
+    &__caption {
+        //initial state
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 20%); //half(center), down 20%
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center; 
+        opacity: 0; 
+        transition: all .5s;
+        backface-visibility: hidden; //fixes weird glitch
+    }
+
+    &:hover &__caption { //hover story, change caption
+        opacity: 1;
+        transform: translate(-50%, -50%); //half(center), up 50% or to center
+    }
+
+    &:hover &__image { //hover story, change image
+        transform: translatex(-4rem) scale(1); 
+        filter: blur(3px) brightness(80%);  //(-) makes it darker, (+) makes it brighter
+    }
+
+}

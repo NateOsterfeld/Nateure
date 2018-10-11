@@ -1,0 +1,22 @@
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both; //both floats (left and right)
+    }
+}
+
+@mixin center-horizontal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+//could replace throughout code with this
+@mixin absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}

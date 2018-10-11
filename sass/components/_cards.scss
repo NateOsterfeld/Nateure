@@ -1,0 +1,160 @@
+.card {
+    //FUNCTIONALITY
+    perspective: 150rem;
+    -moz-perspective: 150rem; //enables firefox
+    position: relative;
+    height: 52rem; //add height here too because it collapsed. you can see difference because it will take up whole card/side and not spin like crazy
+
+    &__side {
+        font-size: 2rem;
+
+        height: 52rem;
+        transition: all .8s ease;
+        position: absolute; //give parent relative
+        top: 0;
+        left: 0;
+        width: 100%;
+        backface-visibility: hidden; //hides back part of "front card" and "back card"
+        border-radius: 3px;
+        overflow: hidden; //hides anything overflowing aka image in this case so edges are still rounded
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .3); //(x y blur, rgba(black, opacity);
+
+        &--front {
+            background-color: $color-white;
+        }
+
+        &--back {
+            background-color: green;
+            transform: rotatey(180deg); //static rotate because it will be put to normal when hovered to actually rotate it
+
+            &-1 {
+                background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+            }
+
+            &-2 {
+                background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+            }
+
+            &-3 {
+                background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark);
+            }
+        }
+    }
+
+    &:hover &__side--front {
+        transform: rotatey(-180deg); //flips card, but needs perspective
+    }
+
+    &:hover &__side--back {
+        transform: rotatey(0deg); //flips card, but needs perspective
+    }
+    //.card:hover .card__side{}
+
+    //FRONT SIDE STYLING
+    &__picture {
+        background-size: cover;
+        height: 23rem;
+        background-blend-mode: soft-light; //allows picture to be seen through orange with other filters optional too
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); //(x y, x y, x y, xy) forms triangle
+        border-top-left-radius:  3px;
+        border-top-right-radius: 3px;
+
+        &--1 {
+            //use ".." in url because it gets compiled in style.css so need to only get out of that
+            background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark), url(../img/nat-5.jpg);
+        }
+
+        &--2 {
+            background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark), url(../img/nat-6.jpg);
+        }
+
+        &--3 {
+            background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark), url(../img/nat-7.jpg);
+        }
+    }
+
+    &__heading {
+        font-size: 2.8rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        text-align: right;
+        color: $color-white;
+        position: absolute;
+        top: 12rem;
+        right: 2rem;  
+        width: 75%;      
+    }
+
+    //new element in the BEM system
+    &__heading-span {
+        padding: 1rem 1.5rem; //pushes enough to have two lines
+        box-decoration-break: clone; //applies all decorations in the selector aka the padding and clones it (so we have two boxes now, same padding)
+        -webkit-box-decoration-break: clone;
+
+        &--1 {
+            background-image: linear-gradient(to right bottom, 
+            rgba($color-secondary-light, .85), 
+            rgba($color-secondary-dark, .85));
+        }
+
+        &--2 {
+            background-image: linear-gradient(to right bottom, 
+            rgba($color-primary-light, .85), 
+            rgba($color-primary-dark, .85));
+        }
+
+        &--3 {
+            background-image: linear-gradient(to right bottom, 
+            rgba($color-tertiary-light, .85), 
+            rgba($color-tertiary-dark, .85));
+        }
+    }
+
+    &__details {
+    padding: 3rem;
+
+        ul {
+            list-style: none;
+            width: 80%;
+            margin: 0 auto; //centers block element inside block element same as rows in grid system
+
+
+            li {
+                text-align: center;
+                font-size: 1.5rem;
+                padding: 1rem;
+
+                &:not(:last-child) {
+                    border-bottom: 1px solid $color-grey-light-2;
+                }
+            }
+        }
+    }
+
+    //FRONT SIDE STYLING
+    &__cta {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -20%); //(50% width of element, 50% height to put it back up
+        width: 90%; //puts words side by side
+        text-align: center;
+    }
+    
+    &__price-box {
+        text-align: center;
+        color: $color-white;
+        margin-bottom: 9rem;
+    }
+
+    &__price-only {
+        font-size: 1.4rem;
+        text-transform: uppercase;
+    }
+
+    &__price-value {
+        font-size: 6rem;
+        font-weight: 100;
+    }
+}

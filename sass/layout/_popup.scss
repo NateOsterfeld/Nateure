@@ -1,0 +1,88 @@
+.popup {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba($color-black, .8);
+    z-index: 9999; //cover everything
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+
+    &__content {
+        position: absolute;
+        top: -30%;
+        left: 50%;
+        //transform: translate(-50%, 50%); cant have 1+ transforms so combined below
+        height: 50rem;
+
+        width: 90%;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black, .2);
+        border-radius: 3px;
+        display: table;
+        overflow: hidden; //cuts image so still has curved border
+        //opacity: 0;
+        transform: translate(-50%, 50%) scale(.1);
+        transition: all .5s .2s; //.2s = delay or other animation
+    }
+
+    &__left {
+        width: 33.33333333%;
+        height: auto;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    &__right {
+        width: 66.66666667%;
+        height: auto;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 3rem 5rem;
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+    }
+
+    &__text {
+        font-size: 1.4rem;
+        margin-bottom: 4rem;
+
+        column-count: 2;
+        column-gap: 4rem; //gutters.. 1em = 14px;
+        column-rule: 2px solid $color-grey-light-2; //border
+    }
+
+     //Open state
+    &:target { //when target is selected through anchor href matching with target id AKA "popup"
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &:target &__content { //popup becomes target, style content
+        opacity: 1;
+        transform: translate(-50%, 50%) scale(1);
+    }
+
+    &__close {
+        &:link,
+        &:visited {
+            color: $color-grey-dark;
+            position: absolute; //positioned to first positioned parent AKA popup-content
+            top: 1rem;
+            right: 2.5rem;
+            font-size: 3rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .2s;
+        }
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+}

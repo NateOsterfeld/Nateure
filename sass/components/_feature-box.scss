@@ -1,0 +1,30 @@
+.feature-box {
+    background-color: rgba($color-white, .7); //.8 opacity AK see through 20%
+    font-size: 1.5rem;
+    padding: 2.5rem;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .15); //x y rgba(color, opacity)
+    transition: all .3s; //all means transform and box-shadow. could do only "transform" if that's all we wanted or were using
+
+    &__icon { //icon font is actually text. hence: font
+        font-size: 6rem;
+        margin-bottom: .6rem;
+        display: inline-block;
+        background-image: linear-gradient(
+            to right,
+            rgba($color-primary-light, 1),
+            rgba($color-primary-dark, 1));
+            -webkit-background-clip:  text;
+            color: transparent;
+    }
+
+    &:hover {
+        transform: translatey(-1.5rem) scale(1.03);
+        //move up
+        box-shadow: 0 3rem 4rem rgba($color-black, .3);
+    }
+
+    //text inherits from parent aka .feature-box
+}
+

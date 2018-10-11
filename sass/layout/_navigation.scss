@@ -1,0 +1,151 @@
+.navigation {
+    &__checkbox {
+        display: none; //hide default, just like radio buttons
+    }
+
+    &__button {
+        background-color: $color-white;
+        height: 7rem;
+        width: 7rem;
+        position: fixed;
+        top: 6rem;
+        right: 6rem;
+        border-radius: 50%;
+        z-index: 2000;
+        box-shadow: 0 1rem 3rem rgba($color-black, .1);
+        text-align: center;
+        cursor: pointer;
+    }
+
+    &__background {
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        position: fixed; //like absolute but doesnt move
+        top: 6.5rem;
+        right: 6.5rem;
+        background-image: radial-gradient($color-primary-light, $color-primary-dark);
+        z-index: 1000; //giving top layer so it stays visible over everything
+        transition: transform .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+        //transform: scale(80);
+    }
+
+    &__nav {
+        height: 100vh;
+        //width: 100%; //now you cant click in the "background"
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 1500;
+
+        opacity: 0; //invisible but still there so remove width until checked
+        width: 0; //width transitions instaneously, so dont need to include
+        transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    &__list {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        list-style: none; //get rid of default bullets
+        text-align: center;
+        width: 100%;
+    }
+
+    &__item {
+        margin: 1rem;
+    }
+
+    &__link {
+        &:link,
+        &:visited {
+            display: inline-block;
+            font-size: 3rem;
+            font-weight: 300;
+            padding: 1rem 2rem; //1rem top/bottom, 2rem sides
+            color: $color-white;
+            text-decoration: none;
+            text-transform: uppercase;
+            background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white 50%); //(slice/angle, color from 0 to transparent/half orange, half to full white) *can use orange as testing color*
+            background-size: 220%; //increases the red and pushes white out even though it's still there. Then it transitions
+            transition: all .4s; //giving it the shifting animation
+
+            span {
+                margin-right: 1.5rem;
+                display: inline-block;
+            }
+        }
+
+        &:hover,
+        &:active{
+            background-position: 100%;
+            color: $color-primary;
+            transform: translatex(1rem);
+        }
+
+    }
+
+
+    //FUNCTIONALITY
+    &__checkbox:checked ~  &__background {
+        transform: scale(80); //when checked, enlarges background fully
+    }
+
+    &__checkbox:checked ~  &__nav {
+        opacity: 1; //make visibile the properties in the initial state
+        width: 100%; 
+    }
+
+
+    //ICON
+    &__icon {
+        position: relative; //this is the true parent
+        margin-top: 3.5rem;
+
+        &, //icon element itself
+        &::before, //before(top) of span pseudo element
+        &::after { //after(bottom) of span pseudo element
+            width: 3rem;
+            height: 2px;
+            background-color: $color-grey-dark-3;
+            display: inline-block;
+        }
+
+        &::before,
+        &::after  {
+            content: ""; //need to define since pseudo-elements
+            position: absolute;
+            left: 0;
+            transition: all .2s; //could probably use translate too
+        }
+
+        //transorm-origin: right will rotate around right
+        &::before { top: -.8rem; } //top
+        &::after { top: .8rem; } //bottom
+    }
+
+    &__button:hover &__icon::before { //can select like this because child
+        top: -1rem;
+    }
+
+    &__button:hover &__icon::after {
+        top: 1rem;
+    }
+
+    //checkbox selected and(+) child and( ) sibling
+    &__checkbox:checked + &__button &__icon {
+        background-color: transparent; //makes middle one invisible
+    }
+
+    &__checkbox:checked + &__button &__icon::before {
+        top: 0;
+        transform: rotate(135deg);
+    }
+
+    &__checkbox:checked + &__button &__icon::after {
+        top: 0;
+        transform: rotate(-135deg);
+    }
+}
